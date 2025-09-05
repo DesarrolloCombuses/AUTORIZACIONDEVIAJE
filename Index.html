@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AUTORIZACIÓN DE VIAJE PARA NIÑOS, NIÑAS Y ADOLESCENTES</title>
+  <meta name="description" content="Formulario de Autorización de Viaje embebido desde Google Apps Script." />
+  <style>
+    :root{--bg:#0b1220;--card:#ffffff;--ink:#0f172a;--muted:#64748b;--brand:#2563eb}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(135deg,#eef2ff,#f8fafc)}
+    header,footer{max-width:1100px;margin:auto;padding:14px}
+    header h1{font-size:18px;margin:0;color:#0f172a}
+    main{height:auto;max-width:100%;margin:0;padding:0}
+    .frame-wrap{height:95vh;width:100%}
+     iframe{width:100%;height:100%;border:0;display:block}
+
+    .actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:10px}
+    .btn{appearance:none;border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+    .btn.primary{background:var(--brand);color:#fff}
+    .btn.outline{background:transparent;border:1px solid #cbd5e1;color:#0f172a}
+    .note{color:#475569;font-size:12px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1></h1>
+  </header>
+
+  <main>
+    <div class="frame-wrap">
+      <!-- inicializacion de embeber -->
+      <iframe
+        id="appframe"
+        title="Autorización de viaje"
+        src="https://script.google.com/macros/s/AKfycbycNOBqTG1-3fjhP29JPTW2QTDGt2kq2oMY0PPQeHhjIPoG6hXAJ_rxElglIt1r7w66/exec"
+        loading="eager"
+        referrerpolicy="no-referrer"
+        allow="clipboard-write *; fullscreen *"
+      ></iframe>
+    </div>
+
+    <div class="actions">
+      <a class="btn outline" href="https://script.google.com/macros/s/AKfycbySrLaI7zzBayppMFHXXwrYFr5t6GpiKLFEjlT0TCOG3k-0BhEP08jT4GI7mlgIFzPk/exec" target="_blank" rel="noopener">Abrir en nueva pestaña</a>
+      <button class="btn primary" onclick="reloadApp()">Recargar</button>
+    </div>
+    <p class="note">Si no se carga dentro de la página, usa “Abrir en nueva pestaña”.</p>
+  </main>
+
+  <footer>
+    <p class="note">© Tu organización — Combuses s.a</p>
+  </footer>
+
+  <script>
+    // Ajuste fino de altura en móviles (iOS/Android): ocupa viewport real
+    function setVH() {
+      const app = document.getElementById('appframe');
+      // El contenedor ya usa 100%, pero aseguramos recalcular en rotaciones
+      app.style.height = '100%';
+    }
+    function reloadApp(){
+      const f = document.getElementById('appframe');
+      const u = new URL(f.src);
+      u.searchParams.set('_ts', Date.now()); // bypass cache
+      f.src = u.toString();
+    }
+    window.addEventListener('orientationchange', setVH);
+    window.addEventListener('resize', setVH);
+    document.addEventListener('DOMContentLoaded', setVH);
+  </script>
+</body>
+</html>
